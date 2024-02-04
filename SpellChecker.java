@@ -60,11 +60,16 @@ public class SpellChecker {
 		int lev = 0;
 		for (int i = 0; i < dictionary.length; i ++)
 		{
+			// if it finds the same word it returns it
+			if (SameWord(word, dictionary[i]))
+			{
+				return dictionary [i];
+			}
 			lev = levenshtein(word, dictionary[i]);
 			if (lev <= threshold)
 			{
 				// in order to find the most closet word and not the first one
-				if (levenshtein(word, similar) > threshold)
+				if ((levenshtein(word, similar) > threshold))
 				{
 					similar = dictionary [i];
 				}
@@ -77,6 +82,24 @@ public class SpellChecker {
 		}
 		else return similar;
 		}
+
+
+		public static boolean SameWord (String word, String dicStr)
+	{
+		/** gets two words and returns if they are equal */
+		if (word.length()!= dicStr.length())
+		{
+			return false;
+		}
+		for (int i = 0; i < word.length(); i ++)
+		{
+			if (word.charAt(i) != dicStr.charAt(i))
+			{
+				return false;
+			}
+		}
+		return true;
+	}
 	}
 	
 
